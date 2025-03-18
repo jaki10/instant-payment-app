@@ -9,10 +9,12 @@ import com.example.instant.payment.model.Transaction;
 import com.example.instant.payment.repository.AccountsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.LockModeType;
 import java.util.List;
 
 @Service
@@ -41,6 +43,7 @@ public class AccountsService {
 	}
 	
 	@Transactional
+	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	public void transferBalances(Transaction transfer) throws OverDraftException, AccountNotExistException {
 		Account senderAccount = getAccountFromTransferInfo(transfer.getSenderId());
 		Account receiverAccount = getAccountFromTransferInfo(transfer.getReceiverId());

@@ -33,7 +33,7 @@ public class AccountServiceTest {
 
 	@Test
 	public void testretrieveAccountById() {
-		when(accountsRepository.findByAccountId(1L)).thenReturn(Optional.of(new Account(1L, BigDecimal.ONE)));
+		when(accountsRepository.findByAccountId(1L)).thenReturn(Optional.of(new Account(1L, "Alpar Alapos", BigDecimal.ONE)));
 
 		assertEquals(BigDecimal.ONE, accountsService.retrieveAccountById(1L).getBalance());
 	}
@@ -56,8 +56,8 @@ public class AccountServiceTest {
 		transactionRequest.setReceiverId(accountToId);
 		transactionRequest.setAmount(amount);
 
-		Account accountFrom = new Account(accountFromId, BigDecimal.TEN);
-		Account accountTo = new Account(accountFromId, BigDecimal.TEN);
+		Account accountFrom = new Account(accountFromId, "Alpar Alapos", BigDecimal.TEN);
+		Account accountTo = new Account(accountFromId, "Jakab Gibsz", BigDecimal.TEN);
 
 		when(accountsRepository.getAccountForUpdate(accountFromId)).thenReturn(Optional.of(accountFrom));
 		when(accountsRepository.getAccountForUpdate(accountToId)).thenReturn(Optional.of(accountTo));
@@ -79,8 +79,8 @@ public class AccountServiceTest {
 		request.setReceiverId(accountFromTo);
 		request.setAmount(amount);
 
-		Account accFrom = new Account(accountFromId, BigDecimal.TEN);
-		Account accTo = new Account(accountFromId, BigDecimal.TEN);
+		Account accFrom = new Account(accountFromId, "Alpar Alapos", BigDecimal.TEN);
+		Account accTo = new Account(accountFromId, "Jakab Gibsz", BigDecimal.TEN);
 
 		when(accountsRepository.getAccountForUpdate(accountFromId)).thenReturn(Optional.of(accFrom));
 		when(accountsRepository.getAccountForUpdate(accountFromTo)).thenReturn(Optional.of(accTo));

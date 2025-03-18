@@ -37,6 +37,8 @@ Features available with transactions:
 - Retrieving all transactions
 - Creating a new transaction
 
+Note: Double transactions and double notifications are handled with PESSIMISTIC_WRITE locks, so nobody can read or write the entities while they are under process.
+
 ### Basic API Information
 | Method | Path                     | Usage                     |
 | --- |--------------------------|---------------------------|
@@ -74,6 +76,7 @@ Hints:
 - Beside the unit tests there should be some integration tests as well testing the integration between the app and the database layer (we can for instance use a h2 database for this purpose)
 - Maybe we can also have a Notification entity and the corresponding NOTIFICATIONS database table where the Kafka consumer service can save the notification data to be send to the receiver part
 - Store the .env file with all the configurations (especially passwords) in a separate, non-public config repository
+- Making a multi-stage Dockerfile to containerize Maven Build as well
 
 
 

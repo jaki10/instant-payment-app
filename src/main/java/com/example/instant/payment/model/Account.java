@@ -26,8 +26,12 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ACCOUNTID")
+    @ApiModelProperty(hidden = true)
     private Long accountId;
 
+    @NotNull
+    @Column(name = "NAME")
+    private String name;
 
     @NotNull
     @Column(name = "BALANCE")
